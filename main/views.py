@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse
 from django.contrib.auth import authenticate, login
 from .forms import LoginForm, UserRegistrationForm, AddScreenshotForm, UploadForm
 from django.contrib.auth.decorators import login_required
@@ -101,6 +101,8 @@ def screen_detail(request, pk):
     return render(request, 'main/screen_detail.html', context={'screen': screen})
 
 
+def download(request):
+    return render(request, 'main/download.html')
 
 
 
