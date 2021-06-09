@@ -1,10 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends "base.html"%}
+{% block title %}{{ request.user.first_name }}'s screenshots{% endblock %}
+{% block menu %}
+    <li><a href="{% url 'add' %}">Add image</a></li>
+    <ul>Filter
+        <li><a href="{% url "account" filter_='all' %}">All</a></li>
+        <li><a href="{% url "account" filter_='day' %}">Day</a></li>
+        <li><a href="{% url "account" filter_='week' %}">Week</a></li>
+    </ul>
+
+    <li><a href="{% url 'logout' %}">Logout</a></li>
+
+{% endblock %}
+
+{% block content %}
+    {% if screens %}
+        {% for screen in screens %}
+            <table border="1" width="100%">
+                <tr>
+                    <td width="192" height="120"><img src="{{ screen.screenshot.url }}" width="192" height="120"></td>
+                    <td>
+                        <p>{{ screen.title }}</p>
+                        <a href="{% url "delete" screen.id %} " class="btn btn-primary">Delete</a>
+                        <a href="{% url "screen_detail" screen.pk %}" class="btn btn-primary">Open</a>
+                        <input type="text" value="{{ link }}{{ screen.screenshot.url }}" size="70">
+                    </td>
+                </tr>
+            </table>
+
+        {% endfor %}
+    {% else %}
+        <p>{{ request.user.first_name }}, your collection is empty.</p>
+    {% endif %}
+{% endblock %}
+
+
+

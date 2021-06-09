@@ -1,0 +1,21 @@
+{% extends "base.html"%}
+{% block title %}Add image{% endblock %}
+{% block menu %}
+    <li><a href="{% url 'add' %}">Add image</a></li>
+    <ul>Filter
+        <li><a href="{% url "account" filter_='all' %}">All</a></li>
+        <li><a href="{% url "account" filter_='day' %}">Day</a></li>
+        <li><a href="{% url "account" filter_='week' %}">Week</a></li>
+    </ul>
+
+    <li><a href="{% url 'logout' %}">Logout</a></li>
+
+{% endblock %}
+
+{% block content %}
+    <form method="POST" enctype="multipart/form-data">
+    {{ form.as_p }}
+    {% csrf_token %}
+        <p><input type="submit" value="Add"></p>
+    </form>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Log-in{% endblock %}
+{% block menu %}
+    <li><a href="{% url 'login' %}">Login</a></li>
+    <li><a href="{% url 'register' %}">Registration</a></li>
+{% endblock %}
+{% block content %}
+    <p>{{ new_user.first_name }}, you are registered</p>
+    <p><a href="{% url "login" %}">Log-in</a> </p>
+{% endblock %}
